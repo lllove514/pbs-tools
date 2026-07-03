@@ -1,22 +1,21 @@
 # Jelly — chat backend (Cloudflare Worker)
 
-Jelly is the guardrailed chat assistant for the Peanut Butter Sundays website.
-This Worker is the **backend**: it receives chat messages from the static widget
-on the site, calls the DeepSeek API, and returns a reply. The DeepSeek API key
-lives only in the Worker's secrets — never in the browser.
+Jelly is the guardrailed chat assistant for Peanut Butter Sundays. This Worker is the backend: it
+receives chat messages from the static widget, calls the Anthropic (Claude) API, and returns a
+reply. The API key lives only in the Worker's secrets, never in the browser.
 
-The frontend widget lives with the site (`/css/jelly.css`, `/js/jelly.js`).
+The frontend widget is in `../chat/` (`jelly.js`, `jelly.css`).
 
 ## Files
 
 - `wrangler.jsonc` — Worker config (name, entry point, compatibility date).
-- `src/index.js` — the Worker. CORS, input sanitizing, guardrails, DeepSeek call.
+- `index.js` — the Worker. CORS, input sanitizing, guardrails, Claude call.
 - `.dev.vars.example` — template for local secrets. Copy to `.dev.vars`.
 
 ## Prerequisites
 
 - Node.js installed (so `npx` is available).
-- A DeepSeek API key.
+- An Anthropic API key from https://console.anthropic.com.
 
 ## Local development
 
@@ -24,7 +23,7 @@ The frontend widget lives with the site (`/css/jelly.css`, `/js/jelly.js`).
 
    ```sh
    cp .dev.vars.example .dev.vars
-   # then edit .dev.vars and set DEEPSEEK_API_KEY=sk-...
+   # then edit .dev.vars and set ANTHROPIC_API_KEY=sk-ant-...
    ```
 
    `.dev.vars` is gitignored and is read automatically by `wrangler dev`.
@@ -35,9 +34,8 @@ The frontend widget lives with the site (`/css/jelly.css`, `/js/jelly.js`).
    npx wrangler dev
    ```
 
-   This serves the Worker at `http://localhost:8787`. To test the widget
-   against it locally, temporarily point `JELLY_ENDPOINT` in `/js/jelly.js` at
-   that URL.
+   This serves the Worker at `http://localhost:8787`. To test the widget against it locally,
+   temporarily point `JELLY_ENDPOINT` in `../chat/jelly.js` at that URL.
 
 ## Deploy
 
@@ -47,10 +45,10 @@ The frontend widget lives with the site (`/css/jelly.css`, `/js/jelly.js`).
    npx wrangler login
    ```
 
-2. Store the DeepSeek key as a production secret (one time, or when it rotates):
+2. Store the Anthropic key as a production secret (one time, or when it rotates):
 
    ```sh
-   npx wrangler secret put DEEPSEEK_API_KEY
+   npx wrangler secret put ANTHROPIC_API_KEY
    ```
 
 3. Deploy:
@@ -59,18 +57,17 @@ The frontend widget lives with the site (`/css/jelly.css`, `/js/jelly.js`).
    npx wrangler deploy
    ```
 
-After deploy, the live URL is printed and will look like:
+After deploy, the live URL is printed and looks like:
 
 ```
 https://jelly.<your-subdomain>.workers.dev
 ```
 
-Paste that URL into `JELLY_ENDPOINT` at the top of `/js/jelly.js` so the site
-widget talks to the deployed Worker.
+Paste that URL into `JELLY_ENDPOINT` at the top of `../chat/jelly.js` so the widget talks to the
+deployed Worker.
 
 ## Notes
 
-- Allowed origins are listed in `src/index.js` (`ALLOWED_ORIGINS`). Add any new
-  production domains there.
-- The system prompt and `PBS_KNOWLEDGE` (mission + FAQ) live in `src/index.js`.
-  Search for `[TODO` and replace the placeholders with real PBS content.
+- Allowed origins are listed in `index.js` (`isAllowedOrigin`). Add any new domains there.
+- The system prompt and `PBS_KNOWLEDGE` (mission plus FAQ) live in `index.js`. Search for `[TODO`
+  and replace the placeholders with real PBS content.

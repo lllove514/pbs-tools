@@ -1,14 +1,14 @@
 /* Jelly — chat widget for Peanut Butter Sundays.
-   Vanilla JS, no build step. Talks to the Cloudflare Worker backend (Part A),
-   which holds the DeepSeek API key. No API key lives here in the browser.
+   Vanilla JS, no build step. Talks to the Cloudflare Worker backend, which
+   holds the Anthropic (Claude) API key. No API key lives here in the browser.
    Conversation history is kept in memory only (no localStorage). */
 
 (function () {
   "use strict";
 
   // ===== CONFIG =====
-  // TODO: paste the real Worker URL printed by `npx wrangler deploy`
-  // (it looks like https://jelly.<your-subdomain>.workers.dev).
+  // PASTE THE WORKER URL printed by `npx wrangler deploy` here, then commit.
+  // It looks like https://jelly.<your-subdomain>.workers.dev
   const JELLY_ENDPOINT = "https://jelly.jellybot.workers.dev";
 
   const GREETING =

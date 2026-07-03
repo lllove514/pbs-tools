@@ -1,5 +1,5 @@
 // Jelly — guardrailed chat backend for Peanut Butter Sundays.
-// Runs as a Cloudflare Worker and proxies to the DeepSeek API so the
+// Runs as a Cloudflare Worker and proxies to the Anthropic (Claude) API so the
 // API key never reaches the browser. Deploy with `npx wrangler deploy`.
 
 // The canonical origin used as the CORS fallback for disallowed callers.
@@ -14,6 +14,7 @@ function isAllowedOrigin(origin) {
     if (host === "peanutbuttersundays.com" || host === "www.peanutbuttersundays.com") return true;
     if (host === "peanutbuttersundays.org" || host === "www.peanutbuttersundays.org") return true;
     if (host.endsWith(".netlify.app")) return true;
+    if (host === "lllove514.github.io") return true;
     if (host === "localhost" || host === "127.0.0.1") return true;
   } catch {
     return false;
@@ -159,39 +160,53 @@ export default {
       });
     }
 
+    // Anthropic takes the system prompt as a top-level field, and the messages
+    // array must contain only user/assistant turns starting with a user turn.
+    const apiMessages = messages.filter((m) => m.role !== "system");
+    while (apiMessages.length && apiMessages[0].role !== "user") {
+      apiMessages.shift();
+    }
+    if (apiMessages.length === 0) {
+      return new Response(JSON.stringify({ error: "No valid messages" }), {
+        status: 400,
+        headers,
+      });
+    }
+
     const payload = {
-      model: "deepseek-chat",
-      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+      model: "claude-haiku-4-5-20251001",
+      system: SYSTEM_PROMPT,
+      messages: apiMessages,
       max_tokens: 400,
       temperature: 0.4,
-      stream: false,
     };
 
-    // Call DeepSeek. Never log message contents; on any failure return a
+    // Call Claude. Never log message contents; on any failure return a
     // friendly reply rather than an error/stack trace.
     try {
-      const res = await fetch("https://api.deepseek.com/chat/completions", {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + env.DEEPSEEK_API_KEY,
+          "x-api-key": env.ANTHROPIC_API_KEY,
+          "anthropic-version": "2023-06-01",
         },
         body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
-        console.error("DeepSeek upstream returned status", res.status);
+        console.error("Anthropic upstream returned status", res.status);
         return new Response(JSON.stringify({ reply: FALLBACK_REPLY }), { headers });
       }
 
       const data = await res.json();
-      const reply = data?.choices?.[0]?.message?.content;
+      const reply = data?.content?.[0]?.text;
       return new Response(
         JSON.stringify({ reply: reply || FALLBACK_REPLY }),
         { headers }
       );
     } catch (err) {
-      console.error("DeepSeek request failed:", err?.name || "error");
+      console.error("Anthropic request failed:", err?.name || "error");
       return new Response(JSON.stringify({ reply: FALLBACK_REPLY }), { headers });
     }
   },

@@ -1,0 +1,10 @@
+# secrets — never commit these
+.dev.vars
+.env
+
+# dependencies and build noise
+node_modules/
+.wrangler/
+
+# OS junk
+.DS_Store
