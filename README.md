@@ -1,45 +1,45 @@
 # Peanut Butter Sundays — map and assistant
 
-Two things I built for Peanut Butter Sundays, a youth-founded 501(c)(3) nonprofit in Los Angeles
-that I co-founded: a homelessness map and a chat assistant. This repository holds only those two,
-pulled out of the organization's website so the code I wrote stands on its own. The full site is
-at https://peanutbuttersundays.com.
+I co-founded Peanut Butter Sundays, a youth-run nonprofit in LA. We started by handing PB&J
+sandwiches to unhoused neighbors and it turned into basketball tournaments, skate meetups, and a
+music festival that put housed and unhoused people in the same place. I run the tech side. This
+repo is the two things I built for it: a map of where the need is, and the chat assistant on the
+site. I pulled both out of the main website so the code stands on its own. The whole site is at
+https://peanutbuttersundays.com.
 
 Live demo: https://lllove514.github.io/pbs-tools/
 
-## What is here
+## The map
 
-### `map/` — LA homelessness map
-A choropleth of Los Angeles County's eight Service Planning Areas (SPAs), shaded by the number of
-people experiencing homelessness. Leaflet on the front, one static GeoJSON of the county
-boundaries, and the counts from the 2025 LAHSA Greater Los Angeles Homeless Count. No build step,
-no backend. Open `map/index.html` and it runs.
+An LA County map shaded by how many people are experiencing homelessness in each of the eight
+Service Planning Areas, from the 2025 LAHSA count. Click a region and it opens that area's numbers
+plus a slider that turns dollars into meals, because "16,955 people in Metro LA" lands harder when
+you can watch what a couple hundred meals does against it. Plain JavaScript, Leaflet, one committed
+GeoJSON of the county boundaries, no build step. The homelessness figures are the part I update by
+hand when LAHSA publishes a new count.
 
-### `chat/` and `worker/` — Jelly, the assistant
-Jelly answers questions about the nonprofit: programs, how to donate, how to volunteer.
+## Jelly, the assistant
 
-- `chat/jelly.js` and `chat/jelly.css` are the widget. Vanilla JavaScript, no framework, no build
-  step. Conversation history stays in memory, nothing is written to the browser's storage.
-- `worker/` is the backend, a small Cloudflare Worker. It holds the API key so the key never
-  reaches the browser, checks the request origin, sanitizes input, and keeps the assistant to a
-  fixed set of facts about the nonprofit so it does not wander.
+Jelly answers questions on the site about our programs, donating, and volunteering. The widget is
+vanilla JS and keeps the conversation in memory, nothing is stored. The API key lives in a small
+Cloudflare Worker so it never reaches the browser, and the Worker keeps Jelly on a short leash: it
+only knows a fixed set of facts about PBS, declines off-topic questions, and points people to 988
+or 211 if someone seems to be in crisis. It runs on Claude.
 
-`chat/demo.html` loads the widget on its own so you can try it.
+## Running it
 
-## Run it
-
-The map needs nothing:
+The map needs nothing but a static server:
 
 ```
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000/map/ for the map, or http://localhost:8000/chat/demo.html for the
-assistant. The assistant's replies need the backend running, see `worker/README.md` for the key
-setup and `npx wrangler dev`. Point `JELLY_ENDPOINT` in `chat/jelly.js` at your Worker URL, and
-add your site's origin to the allowlist in `worker/index.js`.
+Then open http://localhost:8000/map/ for the map, or /chat/demo.html for the assistant. The
+assistant's replies need the Worker running, see `worker/README.md` for the key setup.
 
-## Notes
+## Honest notes
 
-The map data and method are documented in `map/README.md`. The backend setup and guardrails are in
-`worker/README.md`.
+The map's meals math is deliberately blunt, two dollars a meal, meant to give a feel for scale and
+not to be an accounting figure. Jelly tells you when it does not know something instead of guessing.
+The homelessness data is only as current as the last count I loaded. Map method and sources are in
+`map/README.md`; the Worker's guardrails are in `worker/README.md`.
