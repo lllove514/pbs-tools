@@ -8,9 +8,9 @@
   <meta property="og:title" content="The Unhoused Need Your Help. Peanut Butter Sundays" />
   <meta property="og:description" content="See the scale of the crisis across LA and take action. Donate or volunteer with Peanut Butter Sundays." />
   <meta property="og:image" content="https://peanutbuttersundays.netlify.app/images/logo.png" />
-  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="/css/jelly.css?v=9" />
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/jelly.css?v=9" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
     .map-hero {
@@ -469,18 +469,18 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <img src="/images/logo.png" alt="Peanut Butter Sundays logo" />
+    <a href="https://peanutbuttersundays.com/" class="nav-logo">
+      <img src="../images/logo.png" alt="Peanut Butter Sundays logo" />
       <span class="nav-logo-text">Peanut Butter<br>Sundays</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="/about">About</a></li>
-      <li><a href="/map">Map</a></li>
-      <li><a href="/#programs">Programs</a></li>
-      <li><a href="/donate" class="btn-nav-cta">Donate</a></li>
+      <li><a href="https://peanutbuttersundays.com/">About</a></li>
+      <li><a href="./">Map</a></li>
+      <li><a href="https://peanutbuttersundays.com/">Programs</a></li>
+      <li><a href="https://peanutbuttersundays.com/" class="btn-nav-cta">Donate</a></li>
     </ul>
   </div>
 </nav>
@@ -517,8 +517,8 @@
       In 2025, an estimated 72,195 people were experiencing homelessness across Los Angeles County, 43,695 in the City of LA alone. Peanut Butter Sundays has shown up every week across LA since 2020, serving Skid Row, Hollywood, Venice, and neighborhoods throughout the county. See where the need is greatest. Then be part of the solution.
     </p>
     <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
-      <a href="/donate" class="btn btn-primary">Donate Now</a>
-      <a href="/contact" class="btn btn-white">Volunteer</a>
+      <a href="https://peanutbuttersundays.com/" class="btn btn-primary">Donate Now</a>
+      <a href="https://peanutbuttersundays.com/" class="btn btn-white">Volunteer</a>
     </div>
   </div>
 </section>
@@ -569,7 +569,7 @@
       </div>
       <div class="rp-impact-bar"><div class="rp-impact-fill" id="rpImpactFill"></div></div>
       <p class="rp-impact-reward" id="rpImpactReward"></p>
-      <a href="/donate" class="btn btn-primary rp-impact-cta" id="rpImpactCta">Fund 120 meals →</a>
+      <a href="https://peanutbuttersundays.com/" class="btn btn-primary rp-impact-cta" id="rpImpactCta">Fund 120 meals →</a>
       <p class="rp-impact-note">Your gift feeds neighbors across all of LA, wherever the need is greatest, not just here.</p>
     </div>
 
@@ -591,13 +591,13 @@
     </div>
     <div class="footer-col">
       <h4>Navigate</h4>
-      <a href="/about">About Us</a>
-      <a href="/map">The Map</a>
-      <a href="/#programs">Programs</a>
-      <a href="/donate">Donate</a>
-      <a href="/donate#impact-fund">Impact Fund</a>
-      <a href="/contact">Contact</a>
-      <a href="/legal/">Terms &amp; Privacy</a>
+      <a href="https://peanutbuttersundays.com/">About Us</a>
+      <a href="./">The Map</a>
+      <a href="https://peanutbuttersundays.com/">Programs</a>
+      <a href="https://peanutbuttersundays.com/">Donate</a>
+      <a href="https://peanutbuttersundays.com/">Impact Fund</a>
+      <a href="https://peanutbuttersundays.com/">Contact</a>
+      <a href="https://peanutbuttersundays.com/">Terms &amp; Privacy</a>
     </div>
     <div class="footer-col">
       <h4>Follow</h4>
@@ -721,7 +721,7 @@
 
   // Load region polygons and render the choropleth
   var regions;
-  fetch('/map/spa-boundaries.geojson')
+  fetch('spa-boundaries.geojson')
     .then(function(response) {
       if (!response.ok) throw new Error('GeoJSON fetch failed');
       return response.json();
@@ -864,7 +864,7 @@
 </script>
 
 <!-- Jelly chat widget -->
-<script src="/js/jelly.js?v=9" defer></script>
+<script src="../chat/jelly.js?v=9" defer></script>
 
 </body>
 </html>

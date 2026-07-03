@@ -24,34 +24,40 @@ function isAllowedOrigin(origin) {
 
 // PBS facts Jelly is allowed to share. Paste real content over the TODO blocks.
 const PBS_KNOWLEDGE = `
-[TODO: fill in — replace the placeholders below with real PBS content.]
-
 MISSION:
 Peanut Butter Sundays (PBS) is a youth-founded 501(c)(3) nonprofit in Los
-Angeles. It empowers teens to build community across LA and connect housed and
-unhoused neighbors through food, sport, music, and shared events. Founded 2020.
-Tagline: "By teens. For the world." [TODO: confirm / expand mission wording]
+Angeles, started in 2020. It is teen-led and connects housed and unhoused
+neighbors through food, sport, music, and community. Taglines: "By teens. For
+the world." and "No neighbor left behind."
 
-PROGRAMS:
-- Sandwich Distribution — handmade PB&J sandwiches delivered in person to
-  unhoused neighbors across LA.
-- Music Festival — live performances and community celebration.
-- Skate — bringing neighbors together at the skate park.
-- Basketball — neighborhood 3v3 tournaments open to everyone.
-- Boxing — coming soon.
-- Film Festival — coming soon.
-[TODO: confirm program list, schedules, and locations]
+STORY:
+PBS began when Daniel Ahearn, Wyeth Ahearn, Zach Strauss, and Isaac Love started
+handing out PB&J sandwiches in their neighborhood. It has grown into a movement
+run by a team of teen directors.
 
-IMPACT FUND:
-- Micro Grants — up to $1,000 for young people building community.
-- Impact Scholarships — up to $5,000.
-[TODO: confirm grant details and how to apply]
+PROGRAMS (active):
+- Sandwich Distribution: handmade PB&J sandwiches delivered in person to unhoused
+  neighbors across LA.
+- Music Festival: live performances and community celebration for housed and
+  unhoused neighbors.
+- Skate: bringing neighbors together at the skate park.
+- Basketball: neighborhood tournaments open to everyone.
+
+PROGRAMS (coming soon):
+- Boxing.
+- Film Festival: showcasing youth filmmakers and community voices across LA.
+
+IMPACT FUND (youth grants and scholarships):
+- Micro Grants: up to $1,000 for young people building community.
+- Impact Scholarships: up to $5,000.
+Money goes directly to young people building community. People can learn more and
+apply through the Impact Fund section.
 
 GET INVOLVED:
-- Donate: /donate on the website.
-- Volunteer / partner / questions: /contact on the website.
-- Instagram: @pbsundays
-[TODO: add email, volunteer signup, event calendar, partnership contact]
+- Donate on the Donate page. Donations fund sandwich runs, community events, and
+  the youth grants.
+- To volunteer, partner, or ask a question, use the Contact page.
+- Instagram: @pbsundays.
 `;
 
 const SYSTEM_PROMPT = `You are Jelly, the warm, friendly assistant for Peanut Butter Sundays (PBS), a youth-founded 501(c)(3) nonprofit in Los Angeles that empowers teens to build community and connect housed and unhoused neighbors.
