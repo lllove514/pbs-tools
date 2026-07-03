@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peanut Butter Sundays — tools I built</title>
+<style>
+  :root { --ink:#1f1a17; --muted:#6b625c; --line:#e7e1db; --accent:#c8792e; --bg:#faf7f3; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+         color:var(--ink); background:var(--bg); }
+  .wrap { max-width:760px; margin:0 auto; padding:64px 24px 80px; }
+  h1 { font-size:30px; margin:0 0 6px; letter-spacing:-0.01em; }
+  .lede { color:var(--muted); margin:0 0 36px; }
+  .cards { display:grid; gap:16px; grid-template-columns:1fr 1fr; }
+  @media (max-width:560px){ .cards { grid-template-columns:1fr; } }
+  a.card { display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid var(--line);
+           border-radius:14px; padding:22px; transition:border-color .15s, transform .15s; }
+  a.card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .card h2 { font-size:18px; margin:0 0 6px; }
+  .card p { margin:0; color:var(--muted); font-size:14px; }
+  .site { margin-top:32px; padding-top:24px; border-top:1px solid var(--line); }
+  .btn { display:inline-block; text-decoration:none; background:var(--accent); color:#fff; font-weight:600;
+         padding:11px 18px; border-radius:10px; font-size:15px; }
+  .foot { margin-top:40px; color:var(--muted); font-size:13px; }
+  .foot a { color:var(--muted); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Peanut Butter Sundays — two tools I built</h1>
+    <p class="lede">
+      Peanut Butter Sundays is a youth-founded 501(c)(3) nonprofit in Los Angeles. I co-founded it
+      and built these two pieces for it: a homelessness map and an AI assistant. This page is just
+      those two, pulled out on their own. The full site is linked below.
+    </p>
+
+    <div class="cards">
+      <a class="card" href="./map/">
+        <h2>LA homelessness map</h2>
+        <p>A choropleth of LA County's eight Service Planning Areas, shaded by the 2025 LAHSA
+        homeless count. Leaflet, plain JavaScript, public county data.</p>
+      </a>
+      <a class="card" href="./chat/demo.html">
+        <h2>Jelly, the assistant</h2>
+        <p>A guardrailed chat assistant for the site. Vanilla-JS widget on the front, a small
+        backend that holds the API key so it never reaches the browser.</p>
+      </a>
+    </div>
+
+    <div class="site">
+      <a class="btn" href="https://peanutbuttersundays.com" target="_blank" rel="noopener">
+        See the full Peanut Butter Sundays site →
+      </a>
+    </div>
+
+    <p class="foot">
+      Built by Isaac Love. The map and the assistant are mine. The rest of the organization's
+      website is a separate project. Source: this repository.
+    </p>
+  </div>
+</body>
+</html>
