@@ -1,4 +1,4 @@
-# Jelly — chat backend (Cloudflare Worker)
+# Jelly: chat backend (Cloudflare Worker)
 
 Jelly is the guardrailed chat assistant for Peanut Butter Sundays. This Worker is the backend: it
 receives chat messages from the static widget, calls the Anthropic (Claude) API, and returns a
@@ -8,9 +8,9 @@ The frontend widget is in `../chat/` (`jelly.js`, `jelly.css`).
 
 ## Files
 
-- `wrangler.jsonc` — Worker config (name, entry point, compatibility date).
-- `index.js` — the Worker. CORS, input sanitizing, guardrails, Claude call.
-- `.dev.vars.example` — template for local secrets. Copy to `.dev.vars`.
+- `wrangler.jsonc`: Worker config (name, entry point, compatibility date).
+- `index.js`: the Worker. CORS, input sanitizing, guardrails, Claude call.
+- `.dev.vars.example`: template for local secrets. Copy to `.dev.vars`.
 
 ## Prerequisites
 
