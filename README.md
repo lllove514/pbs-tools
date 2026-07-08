@@ -1,4 +1,4 @@
-# Peanut Butter Sundays — map and assistant
+# Peanut Butter Sundays: map and assistant
 
 I co-founded Peanut Butter Sundays, a youth-run nonprofit in LA. We started by handing PB&J
 sandwiches to unhoused neighbors and it turned into basketball tournaments, skate meetups, and a
